@@ -7,7 +7,11 @@ import * as Header from '../component/Header'
 
 const ContactList = (props) => {
 
-    useEffect(async () => {
+    useEffect(() => {
+      fetchData()
+    }, [])
+
+    const fetchData = async() => {
       let res = await fetch("https://simple-contact-crud.herokuapp.com/contact")
       if(res.status === 200){
         const result = await res.json()
@@ -15,10 +19,10 @@ const ContactList = (props) => {
       }else{
         console.log(res)
       }
-    }, [])
+    }
 
     const contacts = props.contactList.length > 0 ? props.contactList.map((con, i) => (
-      <div className={Styles.List.ContainerContact}>
+      <div key={i} className={Styles.List.ContainerContact}>
         <div className={Styles.List.ContainerName}>
           <p className={Styles.List.Name}>{con.firstName} {con.lastName}</p>
         </div>

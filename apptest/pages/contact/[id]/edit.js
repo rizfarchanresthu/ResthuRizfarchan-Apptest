@@ -16,6 +16,10 @@ function validate(firstName, lastName, age, photo) {
 const ContactEdit = (props) => {
     
     useEffect(async() => {
+        fetchData()
+    }, [])
+
+    const fetchData = async() => {
         let res = await fetch(`https://simple-contact-crud.herokuapp.com/contact/${props.id}`)
         if(res.status === 200){
             const result = await res.json()
@@ -24,7 +28,7 @@ const ContactEdit = (props) => {
         }else{
             const result = await res.json()
         }
-    }, [])
+    }
 
     const router = useRouter()
     const [state, setState] = useState({

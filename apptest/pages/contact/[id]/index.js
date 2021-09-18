@@ -9,6 +9,10 @@ import { useRouter } from 'next/dist/client/router';
 const ContactDetail = (props) => {
     const router = useRouter();
     useEffect(async () => {
+      fetchData()
+    }, [])
+
+    const fetchData = async() => {
       let res = await fetch(`https://simple-contact-crud.herokuapp.com/contact/${props.id}`)
       if(res.status === 200){
         const result = await res.json()
@@ -16,7 +20,7 @@ const ContactDetail = (props) => {
       }else{
         const result = await res.json()
       }
-    }, [])
+    }
 
     const handleDelete = async() => {
         let res = await fetch(`https://simple-contact-crud.herokuapp.com/contact/${props.id}`,{
