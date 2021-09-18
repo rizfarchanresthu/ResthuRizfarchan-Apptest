@@ -8,7 +8,7 @@ import { useRouter } from 'next/dist/client/router';
 
 const ContactDetail = (props) => {
     const router = useRouter();
-    useEffect(async () => {
+    useEffect(() => {
       fetchData()
     }, [])
 

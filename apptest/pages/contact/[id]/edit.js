@@ -15,7 +15,7 @@ function validate(firstName, lastName, age, photo) {
 
 const ContactEdit = (props) => {
     
-    useEffect(async() => {
+    useEffect(() => {
         fetchData()
     }, [])
 
