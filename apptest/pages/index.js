@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { getContactList } from '../redux/action/contactAction';
 import {connect} from 'react-redux';
 import Link from 'next/link'
+import * as Header from '../component/Header'
 
 const ContactList = (props) => {
 
@@ -11,7 +12,6 @@ const ContactList = (props) => {
       if(res.status === 200){
         const result = await res.json()
         props.getContactList(result.data)
-        console.log('a',props.contactList, props.getContactList(result.data))
       }else{
         console.log(res)
       }
@@ -23,9 +23,9 @@ const ContactList = (props) => {
           <p className={Styles.List.Name}>{con.firstName} {con.lastName}</p>
         </div>
         <div className={Styles.List.ContainerPhoto}>
-          <img className={Styles.List.Photo} src={con.photo != "N/A" ? con.photo : '/no-image.jpeg'} alt={`${con.firstName}`} ></img>
+          <img className={Styles.List.Photo} src={con.photo} onError={(e)=>{e.target.onerror = null; e.target.src="/no-image.jpeg"}} alt={`${con.firstName}`} ></img>
         </div>
-        <div className={Styles.Button.ButtonDetail}><Link href={`/contact/${con.id}`}><p>Detail &gt;&gt;</p></Link></div>
+        <div className={Styles.Button.ButtonDetail}><Link href={`/contact/${con.id}`}>Detail &gt;&gt;</Link></div>
       </div>
     )) : <div className={Styles.List.ContainerContact}>
       No contact
@@ -35,9 +35,6 @@ const ContactList = (props) => {
         <div className={Styles.Container}>
           <div className={Styles.List.Title}>
             <h1>Contact List</h1>
-          </div>
-          <div className={Styles.Button.ButtonAdd}>
-            <Link href="/contact/add">Tambah Kontak</Link>
           </div>
           <div className={Styles.List.Container}>
           {contacts}

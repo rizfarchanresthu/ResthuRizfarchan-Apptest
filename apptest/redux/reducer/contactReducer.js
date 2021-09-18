@@ -7,7 +7,6 @@ export default (state, action) => {
     if (typeof state === 'undefined') {
       return INITIAL_STATE
     }
-    console.log(state, action.type)
     switch (action.type) {
         case "GET_CONTACT_LIST": 
             return { ...state, contactList: action.payload}
